@@ -10,7 +10,7 @@ Windows:
 - Download this repo as a zip file
 - Unzip somewhere
 - Open bugzilla.cpp with Dev-C++
-- Press F11 to run and compile
+- Press F11 to compile & run
 
 Linux:
 ```
