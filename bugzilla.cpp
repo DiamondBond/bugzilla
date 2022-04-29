@@ -18,7 +18,7 @@
 using namespace std;
 
 // BugZilla version
-const double VERSION = 0.1;
+const double VERSION = 0.2;
 
 // Class to define the properties
 class bug {
