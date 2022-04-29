@@ -4,11 +4,26 @@ Bug tracker for SME software developers.
 ## Description
 Allows for bug tracking and management.
 
+## Installation
+Windows:
+- Install [Dev-C++](https://sourceforge.net/projects/orwelldevcpp)
+- Download this repo as a zip file
+- Unzip somewhere
+- Open bugzilla.cpp with Dev-C++
+- Press F11 to run and compile
+
+Linux:
+```
+git clone https://github.com/diamondbond/bugzilla
+g++ bugzilla.cpp -o bugzilla.o
+```
+
 ## Usage
 Windows: Double click the executable (bugzilla.exe)
+
 Linux: 
 ```
-./bugzilla
+./bugzilla.o
 ```
 
 ## Features
