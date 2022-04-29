@@ -17,7 +17,7 @@
 
 using namespace std;
 
-// BugZilla version
+// Declare Constants
 const double VERSION = 0.2;
 
 // Class to define the properties
@@ -32,6 +32,7 @@ public:
   int Status;
   char filename[50];
   char tstamp[24];
+  char last_tstamp[24];
 
   // Function to create a bug ticket
   void create_bug();
@@ -43,63 +44,24 @@ public:
   void update_bug();
 
   // Function to get filename from user
-  void getfname();
+  void get_fname();
+
+  // Function to get filename from user
+  char *get_tstamp();
 
   // Function to print help
   void help();
 };
 
-// ************ //
-// PRINT HELP
-// ************ //
-void bug::help() {
-  system("cls");
-
-  // Print out help info
-  cout << "\nNAME" << endl;
-  cout << "\tBUGZILLA - a bug tracker for SME software.\n" << endl;
-  cout << "VERSION" << endl;
-  cout << "\tv" << VERSION << "\n" << endl;
-  cout << "SYNPOSIS" << endl;
-  cout << "\t./bugzilla.exe\n" << endl;
-  cout << "DESCRIPTION" << endl;
-  cout << "\tAllows for bug tracking and management.\n" << endl;
-  cout << "FEATURES" << endl;
-  cout << "\tCreate Bug - file a bug for tracking.\n" << endl;
-  cout << "\tUpdate Bug - update a bugs tracking information.\n" << endl;
-  cout << "\tGenerate Bug Report - generate bug report from a bugs tracking "
-          "information.\n"
-       << endl;
-  cout << "RESOURCES" << endl;
-  cout << "\tHomepage: https://github.com/diamondbond/bugzilla\n" << endl;
-  cout << "SEE ALSO" << endl;
-  cout << "\tOfficial BugZilla: https://www.bugzilla.org" << endl;
-
-  // Wait for user input
-  cout << "\nPress any key to continue..." << endl;
-  getch();
-  system("cls");
-}
-
-// ************ //
-// GET FILENAME
-// ************ //
-void bug::getfname() {
-  system("cls");
-  cout << "Enter filename: ";
-  cin >> filename;
-  system("cls");
-}
-
-// ************ //
-// CREATE & STORE
-// ************ //
+// ****** //
+// CREATE
+// ****** //
 void bug::create_bug() {
   // Object to write in file
   ofstream file_obj;
 
   // Prompt user for filename and open it
-  getfname();
+  get_fname();
   file_obj.open(filename, ios::out);
 
   // Object of class bug to input data in file
@@ -112,17 +74,11 @@ void bug::create_bug() {
   obj.ID = rand();
 
   // Get Bug Timestamp
-  // current date/time based on current system
-  time_t now = time(0);
+  char *utcTimestamp;
+  utcTimestamp = get_tstamp();
 
-  // convert now to string form
-  char *dt = ctime(&now);
-
-  // convert now to tm struct for UTC
-  tm *gmtm = gmtime(&now);
-
-  // finally copy utc tstamp to bug's tstamp
-  strcpy(obj.tstamp, asctime(gmtm));
+  strcpy(obj.tstamp, utcTimestamp);
+  strcpy(obj.last_tstamp, utcTimestamp);
 
   // Get Bug Name
   cout << "Enter Bug Name: ";
@@ -160,15 +116,15 @@ void bug::create_bug() {
   system("cls");
 }
 
-// ************ //
+// ****** //
 // UPDATE
-// ************ //
+// ****** //
 void bug::update_bug() {
   // Object to read from file
   ifstream file_obj;
 
   // Opening file in input mode
-  getfname();
+  get_fname();
   file_obj.open(filename, ios::in);
   file_obj.seekg(0, ios::beg);
 
@@ -187,6 +143,7 @@ void bug::update_bug() {
   cout << "Bug Priority: " << obj.Priority << endl;
   cout << "Bug Status: " << obj.Status << endl;
   cout << "Bug Created: " << obj.tstamp << endl;
+  cout << "Last Edited: " << obj.last_tstamp << endl;
 
   // Wait for user input
   cout << "Press any key to continue..." << endl;
@@ -228,6 +185,11 @@ void bug::update_bug() {
   cout << "4.DELIVERED\n > ";
   cin >> obj.Status;
 
+  // Get Last Edited Timestamp
+  char *LastEdit;
+  LastEdit = get_tstamp();
+  strcpy(obj.last_tstamp, LastEdit);
+
   // Writing the object's data in file
   file_obj_upd.write((char *)&obj, sizeof(obj));
 
@@ -240,15 +202,15 @@ void bug::update_bug() {
   system("cls");
 }
 
-// ************ //
-// LOAD & DISPLAY
-// ************ //
+// ******* //
+// DISPLAY
+// ******* //
 void bug::display_bug() {
   // Object to read from file
   ifstream file_obj;
 
   // Opening file in input mode
-  getfname();
+  get_fname();
   file_obj.open(filename, ios::in);
   file_obj.seekg(0, ios::beg);
 
@@ -266,6 +228,7 @@ void bug::display_bug() {
   cout << "Bug Priority: " << obj.Priority << endl;
   cout << "Bug Status: " << obj.Status << endl;
   cout << "Bug Created: " << obj.tstamp << endl;
+  cout << "Last Edited: " << obj.last_tstamp << endl;
 
   // Close file
   file_obj.close();
@@ -276,9 +239,9 @@ void bug::display_bug() {
   system("cls");
 }
 
-// *********** //
-// Driver code
-// *********** //
+// **** //
+// MAIN
+// **** //
 int main() {
 
   // Create object of the class
@@ -336,4 +299,66 @@ int main() {
   }
 
   return 0;
+}
+
+// ************ //
+// GET FILENAME
+// ************ //
+void bug::get_fname() {
+  system("cls");
+  cout << "Enter filename: ";
+  cin >> filename;
+  system("cls");
+}
+
+// ************* //
+// GET TIMESTAMP
+// ************* //
+char *bug::get_tstamp() {
+  // current date/time based on current system
+  time_t now = time(0);
+
+  // convert now to string form
+  char *dt = ctime(&now);
+
+  // convert now to tm struct for UTC
+  tm *gmtm = gmtime(&now);
+
+  dt = asctime(gmtm);
+  cout << "THIS IS IT: " << dt
+       << "===END OF THIS IS IT==="; // DEV DEBUG REMOVE LATER HAZARD
+
+  return dt;
+}
+
+// ********** //
+// PRINT HELP
+// ********** //
+void bug::help() {
+  system("cls");
+
+  // Print out help info
+  cout << "\nNAME" << endl;
+  cout << "\tBUGZILLA - a bug tracker for SME software.\n" << endl;
+  cout << "VERSION" << endl;
+  cout << "\tv" << VERSION << "\n" << endl;
+  cout << "SYNPOSIS" << endl;
+  cout << "\t./bugzilla.exe\n" << endl;
+  cout << "DESCRIPTION" << endl;
+  cout << "\tAllows for bug tracking and management.\n" << endl;
+  cout << "FEATURES" << endl;
+  cout << "\tCreate Bug - file a bug for tracking.\n" << endl;
+  cout << "\tUpdate Bug - update a bugs tracking information.\n" << endl;
+  cout << "\tGenerate Bug Report - generate bug report from a bugs tracking "
+          "information.\n"
+       << endl;
+  cout << "RESOURCES" << endl;
+  cout << "\tHomepage: https://github.com/diamondbond/bugzilla\n" << endl;
+  cout << "SEE ALSO" << endl;
+  cout << "\tOfficial BugZilla: https://www.bugzilla.org" << endl;
+
+  // Wait for user input
+  cout << "\nPress any key to continue..." << endl;
+  getch();
+  system("cls");
 }
