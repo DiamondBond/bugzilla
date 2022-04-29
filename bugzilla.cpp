@@ -1,7 +1,9 @@
+#include <ctime>
 #include <fstream>
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <string>
 #include <time.h>
 
@@ -29,15 +31,16 @@ public:
   int Priority;
   int Status;
   char filename[50];
+  char tstamp[24];
 
-  // Function declaration of input() to input info
-  void input();
+  // Function to create a bug ticket
+  void create_bug();
 
-  // Function declaration of output() to output info
-  void output();
+  // Function to display a bug ticket
+  void display_bug();
 
-  // Function declaration of update() to update info
-  void update();
+  // Function to update a bug ticket
+  void update_bug();
 
   // Function to get filename from user
   void getfname();
@@ -89,9 +92,9 @@ void bug::getfname() {
 }
 
 // ************ //
-// INPUT
+// CREATE & STORE
 // ************ //
-void bug::input() {
+void bug::create_bug() {
   // Object to write in file
   ofstream file_obj;
 
@@ -102,12 +105,24 @@ void bug::input() {
   // Object of class bug to input data in file
   bug obj;
 
-  // Set Rand() Seed
+  // Seed Rand()
   srand(time(NULL));
 
-  // Feeding appropriate data into variables from user input
   // Get Bug ID
   obj.ID = rand();
+
+  // Get Bug Timestamp
+  // current date/time based on current system
+  time_t now = time(0);
+
+  // convert now to string form
+  char *dt = ctime(&now);
+
+  // convert now to tm struct for UTC
+  tm *gmtm = gmtime(&now);
+
+  // finally copy utc tstamp to bug's tstamp
+  strcpy(obj.tstamp, asctime(gmtm));
 
   // Get Bug Name
   cout << "Enter Bug Name: ";
@@ -148,7 +163,7 @@ void bug::input() {
 // ************ //
 // UPDATE
 // ************ //
-void bug::update() {
+void bug::update_bug() {
   // Object to read from file
   ifstream file_obj;
 
@@ -171,9 +186,10 @@ void bug::update() {
   cout << "Bug Desc: " << obj.Desc << endl;
   cout << "Bug Priority: " << obj.Priority << endl;
   cout << "Bug Status: " << obj.Status << endl;
+  cout << "Bug Created: " << obj.tstamp << endl;
 
   // Wait for user input
-  cout << "\nPress any key to continue..." << endl;
+  cout << "Press any key to continue..." << endl;
   getch();
 
   // Close file
@@ -225,9 +241,9 @@ void bug::update() {
 }
 
 // ************ //
-// OUTPUT
+// LOAD & DISPLAY
 // ************ //
-void bug::output() {
+void bug::display_bug() {
   // Object to read from file
   ifstream file_obj;
 
@@ -249,6 +265,7 @@ void bug::output() {
   cout << "Bug Desc: " << obj.Desc << endl;
   cout << "Bug Priority: " << obj.Priority << endl;
   cout << "Bug Status: " << obj.Status << endl;
+  cout << "Bug Created: " << obj.tstamp << endl;
 
   // Close file
   file_obj.close();
@@ -281,7 +298,7 @@ int main() {
 
     // Print menu
     cout << "\n[C]reate New Bug";
-    cout << "\n[U]pdate Bug Status";
+    cout << "\n[U]pdate Bug";
     cout << "\n[G]et Bug Report";
     cout << "\n[H]elp";
     cout << "\n[Q]uit\n";
@@ -295,15 +312,15 @@ int main() {
     switch (choice) {
     case 'C':
       system("cls");
-      object.input();
+      object.create_bug();
       break;
     case 'U':
       system("cls");
-      object.update();
+      object.update_bug();
       break;
     case 'G':
       system("cls");
-      object.output();
+      object.display_bug();
       break;
     case 'H':
       system("cls");
