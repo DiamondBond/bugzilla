@@ -1,6 +1,8 @@
 # bugzilla
 Bug tracker for SME software developers.
 
+![bugzilla main menu](res/mainmenu.png)
+
 ## Description
 Allows for bug tracking and management.
 
