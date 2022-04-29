@@ -18,7 +18,7 @@
 using namespace std;
 
 // Declare Constants
-const double VERSION = 0.2;
+const double VERSION = 0.3;
 
 // Class to define the properties
 class bug {
@@ -31,8 +31,8 @@ public:
   int Priority;
   int Status;
   char filename[50];
-  char tstamp[24];
-  char last_tstamp[24];
+  char tstamp[1000];
+  char last_tstamp[1000];
 
   // Function to create a bug ticket
   void create_bug();
@@ -135,22 +135,22 @@ void bug::update_bug() {
   file_obj.read((char *)&obj, sizeof(obj));
 
   // Output
-  cout << "Current Bug Information:\n" << endl;
+  cout << "Bug Information:\n" << endl;
   cout << "Bug ID: " << obj.ID << endl;
   cout << "Bug Name: " << obj.Name << endl;
   cout << "Bug Type: " << obj.Type << endl;
   cout << "Bug Desc: " << obj.Desc << endl;
   cout << "Bug Priority: " << obj.Priority << endl;
   cout << "Bug Status: " << obj.Status << endl;
-  cout << "Bug Created: " << obj.tstamp << endl;
+  cout << "\nBug Created: " << obj.tstamp << endl;
   cout << "Last Edited: " << obj.last_tstamp << endl;
+
+  // Close file
+  file_obj.close();
 
   // Wait for user input
   cout << "Press any key to continue..." << endl;
   getch();
-
-  // Close file
-  file_obj.close();
 
   // Object to write in file
   ofstream file_obj_upd;
@@ -221,13 +221,14 @@ void bug::display_bug() {
   file_obj.read((char *)&obj, sizeof(obj));
 
   // Output
+  cout << "Bug Information:\n" << endl;
   cout << "Bug ID: " << obj.ID << endl;
   cout << "Bug Name: " << obj.Name << endl;
   cout << "Bug Type: " << obj.Type << endl;
   cout << "Bug Desc: " << obj.Desc << endl;
   cout << "Bug Priority: " << obj.Priority << endl;
   cout << "Bug Status: " << obj.Status << endl;
-  cout << "Bug Created: " << obj.tstamp << endl;
+  cout << "\nBug Created: " << obj.tstamp << endl;
   cout << "Last Edited: " << obj.last_tstamp << endl;
 
   // Close file
@@ -260,9 +261,9 @@ int main() {
     cout << "===== BUGZILLA v" << VERSION << " =====" << endl;
 
     // Print menu
-    cout << "\n[C]reate New Bug";
-    cout << "\n[U]pdate Bug";
-    cout << "\n[G]et Bug Report";
+    cout << "\n[C]reate Bug Report";
+    cout << "\n[D]isplay Bug Report";
+    cout << "\n[U]pdate Bug Report";
     cout << "\n[H]elp";
     cout << "\n[Q]uit\n";
     cout << "\n > ";
@@ -281,7 +282,7 @@ int main() {
       system("cls");
       object.update_bug();
       break;
-    case 'G':
+    case 'D':
       system("cls");
       object.display_bug();
       break;
@@ -306,7 +307,8 @@ int main() {
 // ************ //
 void bug::get_fname() {
   system("cls");
-  cout << "Enter filename: ";
+  cout << "Bug Report Name: " << endl;
+  cout << " > ";
   cin >> filename;
   system("cls");
 }
@@ -325,8 +327,6 @@ char *bug::get_tstamp() {
   tm *gmtm = gmtime(&now);
 
   dt = asctime(gmtm);
-  cout << "THIS IS IT: " << dt
-       << "===END OF THIS IS IT==="; // DEV DEBUG REMOVE LATER HAZARD
 
   return dt;
 }
