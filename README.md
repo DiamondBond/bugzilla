@@ -6,9 +6,14 @@ Bug tracker for SME software developers.
 ![bugzilla help](res/help.png)
 
 ## Description
-Allows for bug tracking and management.
+Minimalistic bug report tracker and management system implementation
+in C++.
 
 ## Installation
+Windows: See [Releases](https://github.com/DiamondBond/bugzilla/releases)
+Linux: See [Install from source](#install-from-source)
+
+## Install from source
 Windows:
 - Install [Dev-C++](https://sourceforge.net/projects/orwelldevcpp)
 - Download this repo as a zip file
