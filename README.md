@@ -1,16 +1,17 @@
 # bugzilla
-Bug tracker for SME software developers.
+Bug report tracker for SME software developers.
 
 ![bugzilla main menu](res/mainmenu.png)
 
 ![bugzilla help](res/help.png)
 
 ## Description
-Minimalistic bug report tracker and management system implementation
+Minimalistic bug report tracker and management system.
 in C++.
 
 ## Installation
 Windows: See [Releases](https://github.com/DiamondBond/bugzilla/releases)
+
 Linux: See [Install from source](#install-from-source)
 
 ## Install from source
