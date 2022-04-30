@@ -1,4 +1,3 @@
-// TODO: UPDATE HELP()
 #include <ctime>
 #include <fstream>
 #include <iostream>
@@ -19,7 +18,7 @@
 using namespace std;
 
 // Declare Constants
-const double VERSION = 0.3;
+const double VERSION = 0.4;
 
 // Class to define the properties
 class bug {
@@ -340,17 +339,17 @@ void bug::help() {
 
   // Print out help info
   cout << "\nNAME" << endl;
-  cout << "\tBUGZILLA - a bug tracker for SME software.\n" << endl;
+  cout << "\tBUGZILLA - minimal bug tracker.\n" << endl;
   cout << "VERSION" << endl;
   cout << "\tv" << VERSION << "\n" << endl;
   cout << "SYNPOSIS" << endl;
   cout << "\t./bugzilla.exe\n" << endl;
   cout << "DESCRIPTION" << endl;
-  cout << "\tAllows for bug tracking and management.\n" << endl;
+  cout << "\tBug tracking and management.\n" << endl;
   cout << "FEATURES" << endl;
-  cout << "\tCreate Bug - file a bug for tracking.\n" << endl;
-  cout << "\tUpdate Bug - update a bugs tracking information.\n" << endl;
-  cout << "\tGenerate Bug Report - generate bug report from a bugs tracking "
+  cout << "\tCreate Bug Report - file a bug for tracking.\n" << endl;
+  cout << "\tUpdate Bug Report - update a bugs tracking information.\n" << endl;
+  cout << "\tDisplay Bug Report - generate bug report from a bugs tracking "
           "information.\n"
        << endl;
   cout << "RESOURCES" << endl;
