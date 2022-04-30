@@ -12,5 +12,5 @@ debug:
 	g++ -g bugzilla.cpp -o bugzilla_debug.o
 
 clean:
-	rm bugzilla.o bugzilla.exe bugzilla_debug.o bugzilla_release.exe bugzilla_release.o
+	rm bugzilla.o bugzilla.exe bugzilla_debug.o bugzilla_release.o bugzilla_release.exe
 

@@ -1,5 +1,5 @@
 # bugzilla
-Bug report tracker for SME software developers.
+Bug report tracker.
 
 ![bugzilla main menu](res/mainmenu.png)
 
@@ -24,7 +24,8 @@ Windows:
 Linux:
 ```
 git clone https://github.com/diamondbond/bugzilla
-g++ bugzilla.cpp -o bugzilla.o
+make all
+# or `make release` if you want to build without -Ofast
 ```
 
 ## Usage
@@ -42,16 +43,12 @@ Creates a bug and files it for tracking.
 Updates a bugs tracking information.
 ### Display a bug report
 Generates a bug report from a bugs tracking information.
+### List bug reports
+Lists available bug reports. [TODO](#implement-list-bugs)
+### Platform agnostic
+Runs on Windows & Linux
 
 ## TODO
-### [DONE] Bring up platform agnostic support
-This would entail getting rid of all the conio.h calls and providing
-platform agnostic functions in place or providing a local conio.h file
-with minimal functionality to support running bugzilla for POSIX users.
-```
-system("cls");
-getch();
-```
 ### Implement list_bugs()
 List all the available bugs, this could be a glorified dir or ls
 statement excluding the current running executable, further expanding
