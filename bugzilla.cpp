@@ -7,18 +7,14 @@
 #include <string>
 #include <time.h>
 
-// Load conio.h if running on DOS
-#if defined(_WIN32) || defined(_WIN64) || defined(_WINDOWS_)
-#define PLATFORM_NAME "windows" // Windows
-#include <conio.h>
-#elif defined(__APPLE__) || defined(__linux__)
-#define PLATFORM_NAME "unix"
-#endif
-
 using namespace std;
 
 // Declare Constants
-const double VERSION = 0.4;
+const double VERSION = 0.5;
+
+// function prototypes for DOS/POSIX portability
+void clear_screen();
+void pause_screen();
 
 // Class to define the properties
 class bug {
@@ -111,9 +107,8 @@ void bug::create_bug() {
   file_obj.close();
 
   // Wait for user input
-  cout << "\nPress any key to continue..." << endl;
-  getch();
-  system("cls");
+  pause_screen();
+  clear_screen();
 }
 
 // ****** //
@@ -149,8 +144,7 @@ void bug::update_bug() {
   file_obj.close();
 
   // Wait for user input
-  cout << "Press any key to continue..." << endl;
-  getch();
+  pause_screen();
 
   // Object to write in file
   ofstream file_obj_upd;
@@ -197,9 +191,8 @@ void bug::update_bug() {
   file_obj_upd.close();
 
   // Wait for user input
-  cout << "Press any key to continue..." << endl;
-  getch();
-  system("cls");
+  pause_screen();
+  clear_screen();
 }
 
 // ******* //
@@ -235,9 +228,8 @@ void bug::display_bug() {
   file_obj.close();
 
   // Wait for user input
-  cout << "Press any key to continue..." << endl;
-  getch();
-  system("cls");
+  pause_screen();
+  clear_screen();
 }
 
 // **** //
@@ -255,7 +247,7 @@ int main() {
   // Main loop
   while (i != 0) {
     // Clear Screen
-    system("cls");
+    clear_screen();
 
     // Print title
     cout << "===== BUGZILLA v" << VERSION << " =====" << endl;
@@ -275,19 +267,19 @@ int main() {
     // Switch to handle user choice
     switch (choice) {
     case 'C':
-      system("cls");
+      clear_screen();
       object.create_bug();
       break;
     case 'U':
-      system("cls");
+      clear_screen();
       object.update_bug();
       break;
     case 'D':
-      system("cls");
+      clear_screen();
       object.display_bug();
       break;
     case 'H':
-      system("cls");
+      clear_screen();
       object.help();
       break;
     case 'Q':
@@ -306,11 +298,11 @@ int main() {
 // GET FILENAME
 // ************ //
 void bug::get_fname() {
-  system("cls");
+  clear_screen();
   cout << "Bug Report Name: " << endl;
   cout << " > ";
   cin >> filename;
-  system("cls");
+  clear_screen();
 }
 
 // ************* //
@@ -335,7 +327,7 @@ char *bug::get_tstamp() {
 // PRINT HELP
 // ********** //
 void bug::help() {
-  system("cls");
+  clear_screen();
 
   // Print out help info
   cout << "\nNAME" << endl;
@@ -358,7 +350,24 @@ void bug::help() {
   cout << "\tOfficial BugZilla: https://www.bugzilla.org" << endl;
 
   // Wait for user input
-  cout << "\nPress any key to continue..." << endl;
-  getch();
+  pause_screen();
+  clear_screen();
+}
+
+// Clear Screen function - platform agnostic
+void clear_screen() {
+#ifdef _WIN32
   system("cls");
+#elif __linux__
+  system("clear");
+#endif
+}
+
+// Pause function - platform agnostic
+void pause_screen() {
+#ifdef _WIN32
+  system("PAUSE");
+#elif __linux__
+  system("sleep 3");
+#endif
 }

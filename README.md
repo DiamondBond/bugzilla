@@ -7,7 +7,6 @@ Bug report tracker for SME software developers.
 
 ## Description
 Minimalistic bug report tracker and management system.
-in C++.
 
 ## Installation
 Windows: See [Releases](https://github.com/DiamondBond/bugzilla/releases)
@@ -43,11 +42,9 @@ Creates a bug and files it for tracking.
 Updates a bugs tracking information.
 ### Display a bug report
 Generates a bug report from a bugs tracking information.
-### Fast and lightweight
-Built with -0fast and efficient code practices in mind, bugzilla should fly.
 
 ## TODO
-### Bring up platform agnostic support
+### [DONE] Bring up platform agnostic support
 This would entail getting rid of all the conio.h calls and providing
 platform agnostic functions in place or providing a local conio.h file
 with minimal functionality to support running bugzilla for POSIX users.
