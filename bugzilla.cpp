@@ -12,7 +12,7 @@ using namespace std;
 // Declare Constants
 const double VERSION = 0.5;
 
-// function prototypes for DOS/POSIX portability
+// function prototypes for NT/POSIX portability
 void clear_screen();
 void pause_screen();
 
@@ -354,7 +354,7 @@ void bug::help() {
   clear_screen();
 }
 
-// Clear Screen function - platform agnostic
+// Platform agnostic clear screen function
 void clear_screen() {
 #ifdef _WIN32
   system("cls");
@@ -363,7 +363,7 @@ void clear_screen() {
 #endif
 }
 
-// Pause function - platform agnostic
+// Platform agnostic pause screen function
 void pause_screen() {
 #ifdef _WIN32
   system("PAUSE");
