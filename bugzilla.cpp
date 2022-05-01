@@ -30,13 +30,16 @@ public:
   char tstamp[1000];
   char last_tstamp[1000];
 
-  // Function to create a bug ticket
+  // Function to create a bug report
   void create_bug();
 
-  // Function to display a bug ticket
+  // Function to display a bug report
   void display_bug();
 
-  // Function to update a bug ticket
+  // Function to list bug reports
+  void list_bug();
+
+  // Function to update a bug report
   void update_bug();
 
   // Function to get filename from user
@@ -232,6 +235,11 @@ void bug::display_bug() {
   clear_screen();
 }
 
+// ******* //
+// LIST
+// ******* //
+void bug::list_bug() {}
+
 // **** //
 // MAIN
 // **** //
@@ -255,6 +263,7 @@ int main() {
     // Print menu
     cout << "\n[C]reate Bug Report";
     cout << "\n[D]isplay Bug Report";
+    cout << "\n[L]ist Bug Report";
     cout << "\n[U]pdate Bug Report";
     cout << "\n[H]elp";
     cout << "\n[Q]uit\n";
@@ -270,13 +279,17 @@ int main() {
       clear_screen();
       object.create_bug();
       break;
-    case 'U':
-      clear_screen();
-      object.update_bug();
-      break;
     case 'D':
       clear_screen();
       object.display_bug();
+      break;
+    case 'L':
+      clear_screen();
+      object.list_bug();
+      break;
+    case 'U':
+      clear_screen();
+      object.update_bug();
       break;
     case 'H':
       clear_screen();
@@ -299,9 +312,12 @@ int main() {
 // ************ //
 void bug::get_fname() {
   clear_screen();
+
+  // Get filename from user input
   cout << "Bug Report Name: " << endl;
   cout << " > ";
   cin >> filename;
+
   clear_screen();
 }
 
