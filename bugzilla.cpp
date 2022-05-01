@@ -11,7 +11,7 @@
 using namespace std;
 
 // Declare Constants
-const double VERSION = 0.6;
+const double VERSION = 0.7;
 
 // function prototypes for NT/POSIX portability
 void clear_screen();
@@ -42,6 +42,9 @@ public:
 
   // Function to update a bug report
   void update_bug();
+
+  // Function to delete a bug report
+  void delete_bug();
 
   // Function to get filename from user
   void get_fname();
@@ -240,8 +243,6 @@ void bug::display_bug() {
 // LIST
 // ******* //
 void bug::list_bug() {
-  clear_screen();
-
   // list files & folders in current working directory
   struct dirent *d;
   DIR *dr;
@@ -257,6 +258,42 @@ void bug::list_bug() {
   cout << endl;
 
   pause_screen();
+  clear_screen();
+}
+
+// ******* //
+// DELETE
+// ******* //
+void bug::delete_bug() {
+  // Get filename to delete from user
+  get_fname();
+
+  // Confirm
+  char confirm;
+  int i = 1;
+  cout << "Are you sure you want to remove '" << filename << "'? [y/n] ";
+  while (i != 0) {
+    cin >> confirm;
+    confirm = toupper(confirm);
+
+    // Switch to handle user confirmation
+    switch (confirm) {
+    case 'Y':
+      remove(filename); // Remove file
+      cout << "\nRemoved '" << filename << "' bug report.\n" << endl;
+      pause_screen();
+      i = 0;
+      break;
+    case 'N':
+      i = 0;
+      break;
+    default:
+      cout << "\nInvalid entry!" << endl;
+      i = 0;
+      break;
+    }
+  }
+
   clear_screen();
 }
 
@@ -282,9 +319,10 @@ int main() {
 
     // Print menu
     cout << "\n[C]reate Bug Report";
-    cout << "\n[D]isplay Bug Report";
     cout << "\n[L]ist Bug Reports";
+    cout << "\n[D]isplay Bug Report";
     cout << "\n[U]pdate Bug Report";
+    cout << "\n[R]emove Bug Report";
     cout << "\n[H]elp";
     cout << "\n[Q]uit\n";
     cout << "\n > ";
@@ -299,17 +337,21 @@ int main() {
       clear_screen();
       object.create_bug();
       break;
-    case 'D':
-      clear_screen();
-      object.display_bug();
-      break;
     case 'L':
       clear_screen();
       object.list_bug();
       break;
+    case 'D':
+      clear_screen();
+      object.display_bug();
+      break;
     case 'U':
       clear_screen();
       object.update_bug();
+      break;
+    case 'R':
+      clear_screen();
+      object.delete_bug();
       break;
     case 'H':
       clear_screen();
@@ -376,13 +418,12 @@ void bug::help() {
   cout << "\tBug tracking and management.\n" << endl;
   cout << "FEATURES" << endl;
   cout << "\tCreate Bug Report - file a bug for tracking.\n" << endl;
-  cout << "\tDisplay Bug Report - generate bug report from a bugs tracking "
-          "information.\n"
-       << endl;
   cout << "\tList Bug Reports - lists bug reports in the current working "
           "directory.\n"
        << endl;
-  cout << "\tUpdate Bug Report - update a bugs tracking information.\n" << endl;
+  cout << "\tDisplay Bug Report - display a bug report.\n" << endl;
+  cout << "\tUpdate Bug Report - update a bug report.\n" << endl;
+  cout << "\tRemove Bug Report - deletes a bug report.\n" << endl;
   cout << "RESOURCES" << endl;
   cout << "\tHomepage: https://github.com/diamondbond/bugzilla\n" << endl;
   cout << "SEE ALSO" << endl;

@@ -40,13 +40,15 @@ Linux:
 ### Platform agnostic
 Runs on Windows & POSIX compliant systems.
 ### Create a bug report
-Creates a bug and files it for tracking.
-### Display a bug report
-Generates a bug report from a bugs tracking information.
+Creates a bug report.
 ### List bug reports
 Lists available bug reports.
+### Display a bug report
+Displays a bug report.
 ### Update a bug report
-Updates a bugs tracking information.
+Updates a bug report.
+### Remove a bug report
+Deletes a bugs report.
 
 ## Inspiration
 https://www.bugzilla.org
