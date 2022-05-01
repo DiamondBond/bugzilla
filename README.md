@@ -37,6 +37,8 @@ Linux:
 ```
 
 ## Features
+### Platform agnostic
+Runs on Windows & POSIX compliant systems.
 ### Create a bug report
 Creates a bug and files it for tracking.
 ### Update a bug report
@@ -45,8 +47,6 @@ Updates a bugs tracking information.
 Generates a bug report from a bugs tracking information.
 ### List bug reports
 Lists available bug reports.
-### Platform agnostic
-Runs on Windows & POSIX compliant systems.
 
 ## Inspiration
 https://www.bugzilla.org
