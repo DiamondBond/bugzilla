@@ -1,3 +1,9 @@
+// Bugzilla
+// Licensed under the MIT License
+// Copyright (c) 2022 Diamond Bond <diamondbond1@gmail.com>
+// Author: Diamond Bond <diamondbond1@gmail.com>
+// URL: https://github.com/diamondbond/bugzilla
+
 #include <ctime>
 #include <dirent.h>
 #include <fstream>
@@ -10,14 +16,14 @@
 
 using namespace std;
 
-// Declare Constants
+// Version
 const double VERSION = 0.7;
 
-// function prototypes for NT/POSIX portability
+// Function prototypes for NT/POSIX portability
 void clear_screen();
 void pause_screen();
 
-// Class to define the properties
+// Bug Class
 class bug {
 public:
   // Instance variables
@@ -27,6 +33,8 @@ public:
   int ID;
   int Priority;
   int Status;
+
+  // Meta variables
   char filename[50];
   char tstamp[1000];
   char last_tstamp[1000];
@@ -73,13 +81,14 @@ void bug::create_bug() {
   // Seed Rand()
   srand(time(NULL));
 
-  // Get Bug ID
+  // Give Bug ID a random number
   obj.ID = rand();
 
   // Get Bug Timestamp
   char *utcTimestamp;
   utcTimestamp = get_tstamp();
 
+  // Populate Created & Last Edited with Timestamp
   strcpy(obj.tstamp, utcTimestamp);
   strcpy(obj.last_tstamp, utcTimestamp);
 
@@ -125,8 +134,10 @@ void bug::update_bug() {
   // Object to read from file
   ifstream file_obj;
 
-  // Opening file in input mode
+  // Get filename from user
   get_fname();
+
+  // Opening file in input mode
   file_obj.open(filename, ios::in);
   file_obj.seekg(0, ios::beg);
 
@@ -136,8 +147,8 @@ void bug::update_bug() {
   // Reading from file into object "obj"
   file_obj.read((char *)&obj, sizeof(obj));
 
-  // Output
-  cout << "Bug Information:\n" << endl;
+  // Output Bug Report
+  cout << "Bug Report:\n" << endl;
   cout << "Bug ID: " << obj.ID << endl;
   cout << "Bug Name: " << obj.Name << endl;
   cout << "Bug Type: " << obj.Type << endl;
@@ -147,7 +158,7 @@ void bug::update_bug() {
   cout << "\nBug Created: " << obj.tstamp << endl;
   cout << "Last Edited: " << obj.last_tstamp << endl;
 
-  // Close file
+  // Close the file
   file_obj.close();
 
   // Wait for user input
@@ -157,7 +168,7 @@ void bug::update_bug() {
   ofstream file_obj_upd;
 
   // Prompt user for new information
-  cout << "\nNew Bug Information:\n" << endl;
+  cout << "\nUpdated Bug Report:\n" << endl;
 
   // Opening file
   file_obj_upd.open(filename, ios::out);
@@ -209,8 +220,10 @@ void bug::display_bug() {
   // Object to read from file
   ifstream file_obj;
 
-  // Opening file in input mode
+  // Get filename from user
   get_fname();
+
+  // Opening file in input mode
   file_obj.open(filename, ios::in);
   file_obj.seekg(0, ios::beg);
 
@@ -220,8 +233,8 @@ void bug::display_bug() {
   // Reading from file into object "obj"
   file_obj.read((char *)&obj, sizeof(obj));
 
-  // Output
-  cout << "Bug Information:\n" << endl;
+  // Output Bug Report
+  cout << "Bug Report:\n" << endl;
   cout << "Bug ID: " << obj.ID << endl;
   cout << "Bug Name: " << obj.Name << endl;
   cout << "Bug Type: " << obj.Type << endl;
@@ -231,12 +244,12 @@ void bug::display_bug() {
   cout << "\nBug Created: " << obj.tstamp << endl;
   cout << "Last Edited: " << obj.last_tstamp << endl;
 
-  // Close file
+  // Close the file
   file_obj.close();
 
   // Wait for user input
   pause_screen();
-  clear_screen();
+  //clear_screen();
 }
 
 // ******* //
@@ -244,15 +257,21 @@ void bug::display_bug() {
 // ******* //
 void bug::list_bug() {
   // list files & folders in current working directory
+
+  // create struct and pointer to cwd
   struct dirent *d;
   DIR *dr;
+
+  // open cwd
   dr = opendir(".");
+
+  // check if dir exists then loop through files and print
   if (dr != NULL) {
     cout << "List of Files & Folders: \n";
     for (d = readdir(dr); d != NULL; d = readdir(dr)) {
       cout << d->d_name << endl;
     }
-    closedir(dr);
+    closedir(dr); // close the dir
   } else
     cout << "\nError Occurred!";
   cout << endl;
@@ -268,11 +287,14 @@ void bug::delete_bug() {
   // Get filename to delete from user
   get_fname();
 
-  // Confirm
+  // Confirmation variables
   char confirm;
   int i = 1;
+
+  // Get confirmation from user
   cout << "Are you sure you want to remove '" << filename << "'? [y/n] ";
   while (i != 0) {
+    // Get y or n from user and convert to uppercase
     cin >> confirm;
     confirm = toupper(confirm);
 
@@ -302,16 +324,15 @@ void bug::delete_bug() {
 // **** //
 int main() {
 
-  // Create object of the class
+  // Object of bug class
   bug object;
 
-  // Create variables for main loop handling
+  // Variables for main loop handling
   int i = 1;
   char choice;
 
   // Main loop
   while (i != 0) {
-    // Clear Screen
     clear_screen();
 
     // Print title
@@ -327,7 +348,7 @@ int main() {
     cout << "\n[Q]uit\n";
     cout << "\n > ";
 
-    // Get user choice as input
+    // Get user input as choice
     cin >> choice;
     choice = toupper(choice);
 
@@ -358,6 +379,8 @@ int main() {
       object.help();
       break;
     case 'Q':
+      clear_screen();
+      cout << "Thank you for using Bugzilla." << endl;
       i = 0;
       break;
     default:
@@ -396,8 +419,10 @@ char *bug::get_tstamp() {
   // convert now to tm struct for UTC
   tm *gmtm = gmtime(&now);
 
+  // convert & assign gmtm to dt
   dt = asctime(gmtm);
 
+  // dt is our final converted & formatted date
   return dt;
 }
 
@@ -407,7 +432,7 @@ char *bug::get_tstamp() {
 void bug::help() {
   clear_screen();
 
-  // Print out help info
+  // Print out help info in style of man page
   cout << "\nNAME" << endl;
   cout << "\tBUGZILLA - minimal bug tracker.\n" << endl;
   cout << "VERSION" << endl;
@@ -448,6 +473,8 @@ void pause_screen() {
 #ifdef _WIN32
   system("PAUSE");
 #elif __linux__
-  system("sleep 3");
+  system("sleep 3"); // Note: on POSIX this will just wait for 3 seconds then
+                     // continue unlike on NT where it will actually wait for a
+                     // char from the user before continuing.
 #endif
 }
