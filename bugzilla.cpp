@@ -282,8 +282,8 @@ int main() {
 
     // Print menu
     cout << "\n[C]reate Bug Report";
-    cout << "\n[D]isplay Bug Report";
     cout << "\n[L]ist Bug Reports";
+    cout << "\n[D]isplay Bug Report";
     cout << "\n[U]pdate Bug Report";
     cout << "\n[H]elp";
     cout << "\n[Q]uit\n";
@@ -299,13 +299,13 @@ int main() {
       clear_screen();
       object.create_bug();
       break;
-    case 'D':
-      clear_screen();
-      object.display_bug();
-      break;
     case 'L':
       clear_screen();
       object.list_bug();
+      break;
+    case 'D':
+      clear_screen();
+      object.display_bug();
       break;
     case 'U':
       clear_screen();
@@ -376,10 +376,13 @@ void bug::help() {
   cout << "\tBug tracking and management.\n" << endl;
   cout << "FEATURES" << endl;
   cout << "\tCreate Bug Report - file a bug for tracking.\n" << endl;
-  cout << "\tUpdate Bug Report - update a bugs tracking information.\n" << endl;
+  cout << "\tList Bug Reports - lists bug reports in the current working "
+          "directory.\n"
+       << endl;
   cout << "\tDisplay Bug Report - generate bug report from a bugs tracking "
           "information.\n"
        << endl;
+  cout << "\tUpdate Bug Report - update a bugs tracking information.\n" << endl;
   cout << "RESOURCES" << endl;
   cout << "\tHomepage: https://github.com/diamondbond/bugzilla\n" << endl;
   cout << "SEE ALSO" << endl;
