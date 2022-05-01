@@ -41,12 +41,12 @@ Linux:
 Runs on Windows & POSIX compliant systems.
 ### Create a bug report
 Creates a bug and files it for tracking.
-### Update a bug report
-Updates a bugs tracking information.
 ### Display a bug report
 Generates a bug report from a bugs tracking information.
 ### List bug reports
 Lists available bug reports.
+### Update a bug report
+Updates a bugs tracking information.
 
 ## Inspiration
 https://www.bugzilla.org
