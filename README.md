@@ -44,27 +44,9 @@ Updates a bugs tracking information.
 ### Display a bug report
 Generates a bug report from a bugs tracking information.
 ### List bug reports
-Lists available bug reports. [TODO](#implement-list-bugs)
+Lists available bug reports.
 ### Platform agnostic
 Runs on Windows & Linux
-
-## TODO
-### Implement list_bugs()
-List all the available bugs, this could be a glorified dir or ls
-statement excluding the current running executable, further expanding
-on this idea we could provide filesystem support to read files from a
-users specified location, this might prove to be a nightmare to
-implement, but who knows.
-```
-$USER selects "[L]ist Bug Reports" at menu and is presented with:
-* bug1
-* bug2
-x bug3
-* bug4
-^ bug5
-```
-The symbol preceeding the bug report name provides some information at
-a glance by representing the bug status.
 
 ## Inspiration
 https://www.bugzilla.org
