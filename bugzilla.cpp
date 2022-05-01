@@ -17,7 +17,7 @@
 using namespace std;
 
 // Version
-const double VERSION = 0.7;
+const string VERSION = "0.7.5";
 
 // Function prototypes for NT/POSIX portability
 void clear_screen();
@@ -158,6 +158,10 @@ void bug::update_bug() {
   cout << "\nBug Created: " << obj.tstamp << endl;
   cout << "Last Edited: " << obj.last_tstamp << endl;
 
+  // Store Created at Timestamp
+  char *createdAt;
+  strcpy(createdAt, obj.tstamp);
+
   // Close the file
   file_obj.close();
 
@@ -168,7 +172,7 @@ void bug::update_bug() {
   ofstream file_obj_upd;
 
   // Prompt user for new information
-  cout << "\nUpdated Bug Report:\n" << endl;
+  cout << "\nPlease enter the new Bug Report:\n" << endl;
 
   // Opening file
   file_obj_upd.open(filename, ios::out);
@@ -196,6 +200,9 @@ void bug::update_bug() {
   cout << "2.IN PROGRESS\n3.FIXED\n";
   cout << "4.DELIVERED\n > ";
   cin >> obj.Status;
+
+  // Copy over Created At Timestamp
+  strcpy(obj.tstamp, createdAt);
 
   // Get Last Edited Timestamp
   char *LastEdit;
@@ -249,7 +256,7 @@ void bug::display_bug() {
 
   // Wait for user input
   pause_screen();
-  //clear_screen();
+  // clear_screen();
 }
 
 // ******* //
@@ -335,17 +342,19 @@ int main() {
   while (i != 0) {
     clear_screen();
 
-    // Print title
-    cout << "===== BUGZILLA v" << VERSION << " =====" << endl;
+    // Print title & menu
+    cout << "===== BUGZILLA v" << VERSION << " =====";
+    cout << "\n|                         |";
+    cout << "\n| [C]reate Bug Report     |";
+    cout << "\n| [L]ist Bug Reports      |";
+    cout << "\n| [D]isplay Bug Report    |";
+    cout << "\n| [U]pdate Bug Report     |";
+    cout << "\n| [R]emove Bug Report     |";
+    cout << "\n| [H]elp                  |";
+    cout << "\n| [Q]uit                  |";
+    cout << "\n|                         |";
+    cout << "\n===========================" << endl;
 
-    // Print menu
-    cout << "\n[C]reate Bug Report";
-    cout << "\n[L]ist Bug Reports";
-    cout << "\n[D]isplay Bug Report";
-    cout << "\n[U]pdate Bug Report";
-    cout << "\n[R]emove Bug Report";
-    cout << "\n[H]elp";
-    cout << "\n[Q]uit\n";
     cout << "\n > ";
 
     // Get user input as choice
