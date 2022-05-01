@@ -46,7 +46,7 @@ Generates a bug report from a bugs tracking information.
 ### List bug reports
 Lists available bug reports.
 ### Platform agnostic
-Runs on Windows & Linux
+Runs on Windows & POSIX compliant systems.
 
 ## Inspiration
 https://www.bugzilla.org
