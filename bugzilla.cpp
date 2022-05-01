@@ -1,4 +1,5 @@
 #include <ctime>
+#include <dirent.h>
 #include <fstream>
 #include <iostream>
 #include <stdio.h>
@@ -10,7 +11,7 @@
 using namespace std;
 
 // Declare Constants
-const double VERSION = 0.5;
+const double VERSION = 0.6;
 
 // function prototypes for NT/POSIX portability
 void clear_screen();
@@ -238,7 +239,26 @@ void bug::display_bug() {
 // ******* //
 // LIST
 // ******* //
-void bug::list_bug() {}
+void bug::list_bug() {
+  clear_screen();
+
+  // list files & folders in current working directory
+  struct dirent *d;
+  DIR *dr;
+  dr = opendir(".");
+  if (dr != NULL) {
+    cout << "List of Files & Folders: \n";
+    for (d = readdir(dr); d != NULL; d = readdir(dr)) {
+      cout << d->d_name << endl;
+    }
+    closedir(dr);
+  } else
+    cout << "\nError Occurred!";
+  cout << endl;
+
+  pause_screen();
+  clear_screen();
+}
 
 // **** //
 // MAIN
@@ -263,7 +283,7 @@ int main() {
     // Print menu
     cout << "\n[C]reate Bug Report";
     cout << "\n[D]isplay Bug Report";
-    cout << "\n[L]ist Bug Report";
+    cout << "\n[L]ist Bug Reports";
     cout << "\n[U]pdate Bug Report";
     cout << "\n[H]elp";
     cout << "\n[Q]uit\n";
