@@ -461,7 +461,7 @@ void bug::help() {
   cout << "RESOURCES" << endl;
   cout << "\tHomepage: https://github.com/diamondbond/bugzilla\n" << endl;
   cout << "SEE ALSO" << endl;
-  cout << "\tOfficial BugZilla: https://www.bugzilla.org" << endl;
+  cout << "\tOfficial BugZilla: https://www.bugzilla.org\n" << endl;
 
   // Wait for user input
   pause_screen();
