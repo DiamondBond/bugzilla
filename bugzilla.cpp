@@ -17,7 +17,7 @@
 using namespace std;
 
 // Version
-const string VERSION = "0.7.5";
+const string VERSION = "0.8";
 
 // Function prototypes for NT/POSIX portability
 void clear_screen();
@@ -148,7 +148,7 @@ void bug::update_bug() {
   file_obj.read((char *)&obj, sizeof(obj));
 
   // Output Bug Report
-  cout << "Bug Report:\n" << endl;
+  cout << "Original Bug Report:\n" << endl;
   cout << "Bug ID: " << obj.ID << endl;
   cout << "Bug Name: " << obj.Name << endl;
   cout << "Bug Type: " << obj.Type << endl;
@@ -157,10 +157,6 @@ void bug::update_bug() {
   cout << "Bug Status: " << obj.Status << endl;
   cout << "\nBug Created: " << obj.tstamp << endl;
   cout << "Last Edited: " << obj.last_tstamp << endl;
-
-  // Store Created at Timestamp
-  char *createdAt;
-  strcpy(createdAt, obj.tstamp);
 
   // Close the file
   file_obj.close();
@@ -172,7 +168,7 @@ void bug::update_bug() {
   ofstream file_obj_upd;
 
   // Prompt user for new information
-  cout << "\nPlease enter the new Bug Report:\n" << endl;
+  cout << "\nPlease enter the updated Bug Report Information:\n" << endl;
 
   // Opening file
   file_obj_upd.open(filename, ios::out);
@@ -200,9 +196,6 @@ void bug::update_bug() {
   cout << "2.IN PROGRESS\n3.FIXED\n";
   cout << "4.DELIVERED\n > ";
   cin >> obj.Status;
-
-  // Copy over Created At Timestamp
-  strcpy(obj.tstamp, createdAt);
 
   // Get Last Edited Timestamp
   char *LastEdit;
@@ -308,8 +301,12 @@ void bug::delete_bug() {
     // Switch to handle user confirmation
     switch (confirm) {
     case 'Y':
-      remove(filename); // Remove file
-      cout << "\nRemoved '" << filename << "' bug report.\n" << endl;
+      // Remove file
+      if (remove(filename) != 0) {
+        cout << "Error deleting '" << filename << "'." << endl;
+      } else {
+        cout << "\nRemoved '" << filename << "' bug report file.\n" << endl;
+      }
       pause_screen();
       i = 0;
       break;
@@ -341,6 +338,9 @@ int main() {
   // Main loop
   while (i != 0) {
     clear_screen();
+
+    // Print help on first run
+    // object.help();
 
     // Print title & menu
     cout << "===== BUGZILLA v" << VERSION << " =====";
@@ -408,7 +408,7 @@ void bug::get_fname() {
   clear_screen();
 
   // Get filename from user input
-  cout << "Bug Report Name: " << endl;
+  cout << "Bug Report Filename: " << endl;
   cout << " > ";
   cin >> filename;
 
@@ -462,6 +462,8 @@ void bug::help() {
   cout << "\tHomepage: https://github.com/diamondbond/bugzilla\n" << endl;
   cout << "SEE ALSO" << endl;
   cout << "\tOfficial BugZilla: https://www.bugzilla.org\n" << endl;
+  cout << "NOTES" << endl;
+  cout << "\tAll input in this program is case-insensitive.\n" << endl;
 
   // Wait for user input
   pause_screen();
