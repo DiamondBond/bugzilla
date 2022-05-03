@@ -339,9 +339,6 @@ int main() {
   while (i != 0) {
     clear_screen();
 
-    // Print help on first run
-    // object.help();
-
     // Print title & menu
     cout << "===== BUGZILLA v" << VERSION << " =====";
     cout << "\n|                         |";

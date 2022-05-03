@@ -49,6 +49,8 @@ Displays a bug report.
 Updates a bug report.
 ### Remove a bug report
 Deletes a bugs report.
+### Built-in help
+Offers help and info/docs.
 
 ## Inspiration
 https://www.bugzilla.org
