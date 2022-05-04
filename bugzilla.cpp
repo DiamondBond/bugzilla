@@ -1,4 +1,4 @@
-// Bugzilla v1.0
+// Bugzilla
 // Licensed under the MIT License
 // Copyright (c) 2022 Diamond Bond <diamondbond1@gmail.com>
 // Author: Diamond Bond <diamondbond1@gmail.com>
@@ -17,7 +17,7 @@
 using namespace std;
 
 // Version
-const string VERSION = "1.0";
+const string VERSION = "1.1";
 
 // Function prototypes for NT/POSIX portability
 void clear_screen();
@@ -128,6 +128,9 @@ void bug::create_bug() {
 // UPDATE
 // ****** //
 void bug::update_bug() {
+  // List out bug report files first
+  list_bug();
+
   // Object to read from file
   ifstream file_obj;
 
