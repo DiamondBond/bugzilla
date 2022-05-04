@@ -1,0 +1,109 @@
+% Created 2022-05-04 Wed 21:21
+% Intended LaTeX compiler: pdflatex
+\documentclass[bigger]{beamer}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usetheme{default}
+\author{Diamond Bond}
+\date{\today}
+\title{Bugzilla}
+\hypersetup{
+ pdfauthor={Diamond Bond},
+ pdftitle={Bugzilla},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.0.50 (Org mode 9.5.3)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\begin{frame}{Outline}
+\tableofcontents
+\end{frame}
+
+
+\section{What is it?}
+\label{sec:org4eaae33}
+\begin{frame}[label={sec:org1d27ef0}]{Description}
+A minimalistic Bug report tracker written in C++ for Windows \& Linux.
+\end{frame}
+
+\begin{frame}[label={sec:org2f5754b}]{Images}
+\begin{block}{Main Menu}
+\begin{center}
+\includegraphics[width=.9\linewidth]{../img/mainmenu.png}
+\end{center}
+\end{block}
+\end{frame}
+
+\section{Features}
+\label{sec:orgaf31cc5}
+\begin{frame}[label={sec:orgfddf93a}]{Create a bug report}
+This function prompts the user for a filename then proceeds to create the file.
+It then asks the user for the relevant information pertaining to a bug report.
+\end{frame}
+\begin{frame}[label={sec:org5721996}]{List bug reports}
+This function lists the available bug reports, we expose it to the user so they can utilize it as they best see fit.
+We also utilize this function internally before filename selection in other functions, this helps provide the user with some context as to what files are available to be read from.
+\end{frame}
+\begin{frame}[label={sec:orgb5c80dc}]{Display a bug report}
+This function displays a bug report in a formatted way.
+It also calls upon list reports before asking for a filename to ensure the user knows that filenames (bug reports) exist.
+
+note: The file name list is taken from the CWD (current working directory)
+\end{frame}
+\begin{frame}[label={sec:org8ccd0b6}]{Update a bug report}
+This function lists out possible bug reports, asks the user to select one (via inputting the filename).
+It then proceeds to print out the old information then asks the user for the newly updated bug report information.
+
+note: Careful consideration has gone into what fields / info can \&/or should be updated so as to avoid mangling the important information that was created (eg: Created At time and original filename)
+\end{frame}
+\begin{frame}[label={sec:org4341ab9}]{Remove a bug report}
+Prompts the user for filename after listing possible filenames.
+Deletes the filename that was provided by the user if it exists and prints out a success message otherwise it prints an error message.
+\end{frame}
+\begin{frame}[label={sec:orgcc5d84a}]{Built-in help}
+Prints out the help screen.
+\begin{block}{Image}
+\begin{center}
+\includegraphics[width=.9\linewidth]{../img/help.png}
+\end{center}
+\end{block}
+\end{frame}
+\begin{frame}[label={sec:orgc061064}]{Platform agnostic}
+This project should compile and run on Windows and Linux.
+It has been thoroughly tested on Windows 10 LTSC under a QEMU/KVM instance.
+
+It has also been tested on Linux (Arch Linux) although it should theoretically work on any Linux/BSD/Darwin/POSIX operating system as all it calls upon is:
+\begin{itemize}
+\item sleep
+\item clear
+\end{itemize}
+
+These system binaries are called upon in the \href{bugzilla.cpp}{platform agnostic helper functions}.
+They are available with any basic coreutils package that is available on any distro/POSIX compliant OS offering.
+\end{frame}
+
+\section{Inspiration}
+\label{sec:orgbd6bbb9}
+\begin{frame}[label={sec:orgde77190}]{A Brief History of Bugzilla}
+This project was insipired by the original \href{https://www.bugzilla.org}{Bugzilla}.
+
+When mozilla.org first came online in 1998, one of the first products that was released was Bugzilla, a bug system implemented using freely available open source tools. Bugzilla was originally written in TCL by Terry Weissman for use at mozilla.org to replace the in-house system then in use at Netscape. 
+\end{frame}
+
+\begin{frame}[label={sec:orgfee5354}]{Links}
+Homepage: \url{https://www.bugzilla.org}
+
+About: \url{https://www.bugzilla.org/about}
+\end{frame}
+\end{document}
