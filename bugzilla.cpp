@@ -71,8 +71,10 @@ void bug::create_bug() {
   // Object to write in file
   ofstream file_obj;
 
-  // Prompt user for filename and open it
+  // Prompt user for filename
   get_fname();
+
+  // Open file
   file_obj.open(filename, ios::out);
 
   // Object of class bug to input data in file
