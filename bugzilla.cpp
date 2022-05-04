@@ -17,7 +17,7 @@
 using namespace std;
 
 // Version
-const string VERSION = "0.8";
+const string VERSION = "1.0";
 
 // Function prototypes for NT/POSIX portability
 void clear_screen();
