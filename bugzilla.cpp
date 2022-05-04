@@ -278,6 +278,9 @@ void bug::list_bug() {
 // DELETE
 // ******* //
 void bug::delete_bug() {
+  // List out bug report files first
+  list_bug();
+
   // Get filename to delete from user
   get_fname();
 
