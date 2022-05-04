@@ -340,7 +340,7 @@ int main() {
     clear_screen();
 
     // Print title & menu
-    cout << "===== BUGZILLA v" << VERSION << " =====";
+    cout << "===== BUGZILLA v" << VERSION << " =======";
     cout << "\n|                         |";
     cout << "\n| [C]reate Bug Report     |";
     cout << "\n| [L]ist Bug Reports      |";
