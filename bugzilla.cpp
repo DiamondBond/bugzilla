@@ -1,4 +1,4 @@
-// Bugzilla
+// Bugzilla v1.0
 // Licensed under the MIT License
 // Copyright (c) 2022 Diamond Bond <diamondbond1@gmail.com>
 // Author: Diamond Bond <diamondbond1@gmail.com>
