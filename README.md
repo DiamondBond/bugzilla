@@ -1,9 +1,9 @@
 # bugzilla
 Bug report tracker.
 
-![bugzilla main menu](res/mainmenu.png)
+![bugzilla main menu](img/mainmenu.png)
 
-![bugzilla help](res/help.png)
+![bugzilla help](img/help.png)
 
 ## Description
 Minimalistic bug report tracker and management system.
