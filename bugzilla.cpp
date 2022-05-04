@@ -31,7 +31,6 @@ public:
   char Type[50];
   char Desc[1000];
   int ID;
-  int Priority;
   int Status;
 
   // Meta variables
@@ -107,10 +106,6 @@ void bug::create_bug() {
   cout << "\nEnter Bug Description: ";
   cin.getline(obj.Desc, sizeof(obj.Desc));
 
-  // Get Bug Priority
-  cout << "\nEnter Bug Priority [0-100]: ";
-  cin >> obj.Priority;
-
   // Get Bug Status
   cout << "\nStatus of bug:\n";
   cout << "1.NOT YET ASSIGNED\n";
@@ -155,7 +150,6 @@ void bug::update_bug() {
   cout << "Bug Name: " << obj.Name << endl;
   cout << "Bug Type: " << obj.Type << endl;
   cout << "Bug Desc: " << obj.Desc << endl;
-  cout << "Bug Priority: " << obj.Priority << endl;
   cout << "Bug Status: " << obj.Status << endl;
   cout << "\nBug Created: " << obj.tstamp << endl;
   cout << "Last Edited: " << obj.last_tstamp << endl;
@@ -188,10 +182,6 @@ void bug::update_bug() {
   cout << "\nEnter Bug Description: ";
   cin.getline(obj.Desc, sizeof(obj.Desc));
 
-  // Get New Bug Priority
-  cout << "\nEnter Bug Priority [0-100]: ";
-  cin >> obj.Priority;
-
   // Get New Bug Status
   cout << "\nStatus of bug:\n";
   cout << "1.NOT YET ASSIGNED\n";
@@ -219,6 +209,9 @@ void bug::update_bug() {
 // DISPLAY
 // ******* //
 void bug::display_bug() {
+  // List out bug report files first
+  list_bug();
+
   // Object to read from file
   ifstream file_obj;
 
@@ -241,7 +234,6 @@ void bug::display_bug() {
   cout << "Bug Name: " << obj.Name << endl;
   cout << "Bug Type: " << obj.Type << endl;
   cout << "Bug Desc: " << obj.Desc << endl;
-  cout << "Bug Priority: " << obj.Priority << endl;
   cout << "Bug Status: " << obj.Status << endl;
   cout << "\nBug Created: " << obj.tstamp << endl;
   cout << "Last Edited: " << obj.last_tstamp << endl;
@@ -342,7 +334,7 @@ int main() {
     clear_screen();
 
     // Print title & menu
-    cout << "===== BUGZILLA v" << VERSION << " =======";
+    cout << "====== BUGZILLA v" << VERSION << " ======";
     cout << "\n|                         |";
     cout << "\n| [C]reate Bug Report     |";
     cout << "\n| [L]ist Bug Reports      |";
