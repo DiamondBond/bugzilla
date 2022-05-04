@@ -77,11 +77,11 @@ void bug::create_bug() {
   // Open file
   file_obj.open(filename, ios::out);
 
-  // Object of class bug to input data in file
-  bug obj;
-
   // Seed Rand()
   srand(time(NULL));
+
+  // Object of class bug to input data in file
+  bug obj;
 
   // Give Bug ID a random number
   obj.ID = rand();
