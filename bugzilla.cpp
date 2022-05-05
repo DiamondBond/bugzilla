@@ -432,7 +432,8 @@ void bug::get_fname() {
   // Get filename from user input
   cout << "Bug Report Filename: " << endl;
   cout << " > ";
-  cin >> filename;
+  cin.ignore();
+  cin.getline(filename, 50);
 
   clear_screen();
 }
@@ -504,8 +505,6 @@ void pause_screen() {
 #ifdef _WIN32
   system("PAUSE");
 #elif __linux__
-  system("sleep 3"); // Note: on POSIX this will just wait for 3 seconds then
-                     // continue unlike on NT where it will actually wait for a
-                     // char from the user before continuing.
+  system("sleep 3");
 #endif
 }
