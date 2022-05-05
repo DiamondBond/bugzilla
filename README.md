@@ -24,12 +24,12 @@ Windows:
 Linux:
 ```
 git clone https://github.com/diamondbond/bugzilla
-make all
-# or `make release` if you want to build without -Ofast
+cd bugzilla
+make
 ```
 
 ## Usage
-Windows: Double click the executable (bugzilla.exe)
+Windows: Double click the executable `bugzilla.exe`
 
 Linux: 
 ```

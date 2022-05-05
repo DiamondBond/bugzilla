@@ -18,44 +18,36 @@
 ** Description
 A minimalistic Bug report tracker written in C++ for Windows & Linux.
 
-** Images
-*** Main Menu
 [[../img/mainmenu.png]]
 
 * Features
+
 ** Create a bug report
 This function prompts the user for a filename then proceeds to create the file.
 It then asks the user for the relevant information pertaining to a bug report.
+
 ** List bug reports
 This function lists the available bug reports, we expose it to the user so they can utilize it as they best see fit.
 We also utilize this function internally before filename selection in other functions, this helps provide the user with some context as to what files are available to be read from.
+
 ** Display a bug report
 This function displays a bug report in a formatted way.
 It also calls upon list reports before asking for a filename to ensure the user knows that filenames (bug reports) exist.
 
 note: The file name list is taken from the CWD (current working directory)
+
 ** Update a bug report
 This function lists out possible bug reports, asks the user to select one (via inputting the filename).
 It then proceeds to print out the old information then asks the user for the newly updated bug report information.
 
 note: Careful consideration has gone into what fields / info can &/or should be updated so as to avoid mangling the important information that was created (eg: Created At time and original filename)
+
 ** Remove a bug report
 Prompts the user for filename after listing possible filenames.
 Deletes the filename that was provided by the user if it exists and prints out a success message otherwise it prints an error message.
-** Built-in help
-Prints out the help screen.
-*** Image
+
+** Help
 [[../img/help.png]]
-** Platform agnostic
-This project should compile and run on Windows and Linux.
-It has been thoroughly tested on Windows 10 LTSC under a QEMU/KVM instance.
-
-It has also been tested on Linux (Arch Linux) although it should theoretically work on any Linux/BSD/Darwin/POSIX operating system as all it calls upon is:
-- sleep
-- clear
-
-These system binaries are called upon in the [[file:bugzilla.cpp::// Platform agnostic clear screen function][platform agnostic helper functions]].
-They are available with any basic coreutils package that is available on any distro/POSIX compliant OS offering.
 
 * Inspiration
 ** A Brief History of Bugzilla
@@ -64,24 +56,6 @@ This project was insipired by the original [[https://www.bugzilla.org][Bugzilla]
 When mozilla.org first came online in 1998, one of the first products that was released was Bugzilla, a bug system implemented using freely available open source tools. Bugzilla was originally written in TCL by Terry Weissman for use at mozilla.org to replace the in-house system then in use at Netscape. 
 
 ** Links
-Homepage: https://www.bugzilla.org
+Homepage: https://github.com/diamondbond/bugzilla
 
-About: https://www.bugzilla.org/about
-
-* Notes
-This project was designed as an assignment for Mr. Nimalan of AICT - 3, 1/1, FERNANDO ROAD, COLOMBO 6. 011236363.
-
-The project was managed and controlled by VCS (git) at https://github.com/diamondbond/bugzilla
-
-I contacted some friends of mine to be beta testers to help me improve the user experience.
-
-With this, I gained some valuable advice:
-- Display the list of bug reports before operations on said bug reports requiring filename input
-- Notify user of case-insensitivity
-
-Adding this feature into the mix allowed for greater user experience and easier operation of the program on a day-to-day basis.
-
-On Windows there were some strange memory corruption issues that I had to manually resolve (these issues were pertaining to the mismanagement of various pointers and strcpy() calls)
-On Windows there was also another issue pertaining to my environment setup that was swiftly resolved; the local time in the Windows VM I was using was sometimes incorrect and as a result the timestamps in the created bug reports would also be incorrect, this has been resolved by syncing the Windows time in the VM.
-
-On Linux there is only 1 issue: the pause_screen() function does not really pause the screen and instead waits for 3 seconds before continuing, this is to avoid feature creep and to keep things simple - besides; most users of this software will most likely be running it on Windows and those who are using it on Linux can patch the source code and compile it themselves with a proper implementation of pause_screen(). My chosen model of software distribution allows for any & all users to make pull requests / issues that point out required functionality, also the Licensing chosen should allow for redistribution of said software in a permissive free software license manner (MIT License).
+Original Bugzilla: https://www.bugzilla.org/about

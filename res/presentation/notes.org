@@ -1,0 +1,17 @@
+#+STARTUP: overview inlineimages
+#+TITLE: Notes
+#+LANGUAGE: en
+#+OPTIONS: nil
+* Notes
+This project was designed as an assignment for Mr. Nimalan's C++ Course at AICT.
+
+Feedback from users:
+Display list of files before asking for filename.
+Notify user of case-insensitivity.
+
+** Windows
+On Windows there were some strange memory corruption issues that I had to manually resolve (these issues were pertaining to the mismanagement of various char widths and strcpy() calls)
+
+** POSIX
+On POSIX systems there was only 1 issue: the pause_screen() function does not really pause the screen and instead waits for 3 seconds before continuing. This has been fixed in this commit:
+https://github.com/DiamondBond/bugzilla/commit/f98f160befb6189f232eb415ffe330271500f7c6
