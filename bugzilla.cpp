@@ -464,8 +464,6 @@ void bug::help() {
   cout << "\tBUGZILLA - minimal bug tracker.\n" << endl;
   cout << "VERSION" << endl;
   cout << "\tv" << VERSION << "\n" << endl;
-  cout << "SYNPOSIS" << endl;
-  cout << "\t./bugzilla.exe\n" << endl;
   cout << "DESCRIPTION" << endl;
   cout << "\tBug tracking and management.\n" << endl;
   cout << "FEATURES" << endl;
@@ -478,10 +476,10 @@ void bug::help() {
   cout << "\tRemove Bug Report - deletes a bug report.\n" << endl;
   cout << "RESOURCES" << endl;
   cout << "\tHomepage: https://github.com/diamondbond/bugzilla\n" << endl;
-  cout << "SEE ALSO" << endl;
-  cout << "\tOfficial BugZilla: https://www.bugzilla.org\n" << endl;
   cout << "NOTES" << endl;
   cout << "\tAll input in this program is case-insensitive.\n" << endl;
+  cout << "SEE ALSO" << endl;
+  cout << "\tOfficial BugZilla: https://www.bugzilla.org\n" << endl;
 
   // Wait for user input
   pause_screen();
