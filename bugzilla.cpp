@@ -8,6 +8,7 @@
 #include <dirent.h>
 #include <fstream>
 #include <iostream>
+#include <limits>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -506,6 +507,8 @@ void pause_screen() {
 #ifdef _WIN32
   system("PAUSE");
 #elif __linux__
-  system("sleep 3");
+  cout << endl << "Press <Enter> to continue...";
+  cin.ignore(numeric_limits<streamsize>::max(), '\n');
+  cin.get();
 #endif
 }
