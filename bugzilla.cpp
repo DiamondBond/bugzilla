@@ -25,41 +25,26 @@ void pause_screen();
 
 // Bug Class
 class bug {
-public:
   // Instance variables
+  int ID;
   char Name[20];
   char Type[50];
   char Desc[1000];
-  int ID;
-  int Status;
+  char Status;
 
   // Meta variables
   char filename[50];
   char tstamp[1000];
   char last_tstamp[1000];
 
-  // Function to create a bug report
+public:
   void create_bug();
-
-  // Function to display a bug report
   void display_bug();
-
-  // Function to list bug reports
   void list_bug();
-
-  // Function to update a bug report
   void update_bug();
-
-  // Function to delete a bug report
   void delete_bug();
-
-  // Function to get filename from user
   void get_fname();
-
-  // Function to get filename from user
   char *get_tstamp();
-
-  // Function to print help
   void help();
 };
 
@@ -96,25 +81,26 @@ void bug::create_bug() {
   // Get Bug Name
   cout << "Enter Bug Name: ";
   cin.ignore();
-  cin.getline(obj.Name, sizeof(obj.Name));
+  cin.getline(obj.Name, 20);
 
   // Get Bug Type
   cout << "\nEnter Bug Type: ";
-  cin.getline(obj.Type, sizeof(obj.Type));
+  cin.getline(obj.Type, 50);
 
   // Get Bug Desc
   cout << "\nEnter Bug Description: ";
-  cin.getline(obj.Desc, sizeof(obj.Desc));
+  cin.getline(obj.Desc, 1000);
 
   // Get Bug Status
   cout << "\nStatus of bug:\n";
-  cout << "1.NOT YET ASSIGNED\n";
-  cout << "2.IN PROGRESS\n3.FIXED\n";
-  cout << "4.DELIVERED\n > ";
+  cout << "[N]: NOT YET ASSIGNED\n";
+  cout << "[P]: IN PROGRESS\n[F]: FIXED\n";
+  cout << "[D]: DELIVERED\n > ";
   cin >> obj.Status;
+  obj.Status = toupper(obj.Status);
 
   // Writing the object's data in file
-  file_obj.write((char *)&obj, sizeof(obj));
+  file_obj.write(reinterpret_cast<char *>(&obj), sizeof(obj));
 
   // Close file
   file_obj.close();
@@ -145,7 +131,24 @@ void bug::update_bug() {
   bug obj;
 
   // Reading from file into object "obj"
-  file_obj.read((char *)&obj, sizeof(obj));
+  file_obj.read(reinterpret_cast<char *>(&obj), sizeof(obj));
+
+  // Convert Char Status to String CurrStatus
+  string currStatus;
+  switch (obj.Status) {
+  case 'N':
+    currStatus = "NOT YET ASSIGNED";
+    break;
+  case 'P':
+    currStatus = "IN PROGRESS";
+    break;
+  case 'F':
+    currStatus = "FIXED";
+    break;
+  case 'D':
+    currStatus = "DELIVERED";
+    break;
+  }
 
   // Output Bug Report
   cout << "Original Bug Report:\n" << endl;
@@ -153,7 +156,7 @@ void bug::update_bug() {
   cout << "Bug Name: " << obj.Name << endl;
   cout << "Bug Type: " << obj.Type << endl;
   cout << "Bug Desc: " << obj.Desc << endl;
-  cout << "Bug Status: " << obj.Status << endl;
+  cout << "Bug Status: " << currStatus << endl;
   cout << "\nBug Created: " << obj.tstamp << endl;
   cout << "Last Edited: " << obj.last_tstamp << endl;
 
@@ -175,22 +178,23 @@ void bug::update_bug() {
   // Get New Bug Name
   cout << "Enter Bug Name: ";
   cin.ignore();
-  cin.getline(obj.Name, sizeof(obj.Name));
+  cin.getline(obj.Name, 20);
 
   // Get New Bug Type
   cout << "\nEnter Bug Type: ";
-  cin.getline(obj.Type, sizeof(obj.Type));
+  cin.getline(obj.Type, 50);
 
   // Get New Bug Desc
   cout << "\nEnter Bug Description: ";
-  cin.getline(obj.Desc, sizeof(obj.Desc));
+  cin.getline(obj.Desc, 1000);
 
   // Get New Bug Status
   cout << "\nStatus of bug:\n";
-  cout << "1.NOT YET ASSIGNED\n";
-  cout << "2.IN PROGRESS\n3.FIXED\n";
-  cout << "4.DELIVERED\n > ";
+  cout << "[N]: NOT YET ASSIGNED\n";
+  cout << "[P]: IN PROGRESS\n[F]: FIXED\n";
+  cout << "[D]: DELIVERED\n > ";
   cin >> obj.Status;
+  obj.Status = toupper(obj.Status);
 
   // Get Last Edited Timestamp
   char *LastEdit;
@@ -198,7 +202,7 @@ void bug::update_bug() {
   strcpy(obj.last_tstamp, LastEdit);
 
   // Writing the object's data in file
-  file_obj_upd.write((char *)&obj, sizeof(obj));
+  file_obj_upd.write(reinterpret_cast<char *>(&obj), sizeof(obj));
 
   // Close file
   file_obj_upd.close();
@@ -229,7 +233,24 @@ void bug::display_bug() {
   bug obj;
 
   // Reading from file into object "obj"
-  file_obj.read((char *)&obj, sizeof(obj));
+  file_obj.read(reinterpret_cast<char *>(&obj), sizeof(obj));
+
+  // Convert Char Status to String CurrStatus
+  string currStatus;
+  switch (obj.Status) {
+  case 'N':
+    currStatus = "NOT YET ASSIGNED";
+    break;
+  case 'P':
+    currStatus = "IN PROGRESS";
+    break;
+  case 'F':
+    currStatus = "FIXED";
+    break;
+  case 'D':
+    currStatus = "DELIVERED";
+    break;
+  }
 
   // Output Bug Report
   cout << "Bug Report:\n" << endl;
@@ -237,7 +258,7 @@ void bug::display_bug() {
   cout << "Bug Name: " << obj.Name << endl;
   cout << "Bug Type: " << obj.Type << endl;
   cout << "Bug Desc: " << obj.Desc << endl;
-  cout << "Bug Status: " << obj.Status << endl;
+  cout << "Bug Status: " << currStatus << endl;
   cout << "\nBug Created: " << obj.tstamp << endl;
   cout << "Last Edited: " << obj.last_tstamp << endl;
 
