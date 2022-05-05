@@ -34,8 +34,8 @@ class bug {
 
   // Meta variables
   char filename[50];
-  char tstamp[1000];
-  char last_tstamp[1000];
+  char tstamp[26];
+  char last_tstamp[26];
 
 public:
   void create_bug();
@@ -148,6 +148,8 @@ void bug::update_bug() {
   case 'D':
     currStatus = "DELIVERED";
     break;
+  default:
+    break;
   }
 
   // Output Bug Report
@@ -249,6 +251,8 @@ void bug::display_bug() {
     break;
   case 'D':
     currStatus = "DELIVERED";
+    break;
+  default:
     break;
   }
 
