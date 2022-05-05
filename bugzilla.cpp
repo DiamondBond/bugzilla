@@ -149,6 +149,7 @@ void bug::update_bug() {
     currStatus = "DELIVERED";
     break;
   default:
+    currStatus = "ERROR";
     break;
   }
 
@@ -178,20 +179,20 @@ void bug::update_bug() {
   file_obj_upd.open(filename, ios::out);
 
   // Get New Bug Name
-  cout << "Enter Bug Name: ";
+  cout << "Enter New Bug Name: ";
   cin.ignore();
   cin.getline(obj.Name, 20);
 
   // Get New Bug Type
-  cout << "\nEnter Bug Type: ";
+  cout << "\nEnter New Bug Type: ";
   cin.getline(obj.Type, 50);
 
   // Get New Bug Desc
-  cout << "\nEnter Bug Description: ";
+  cout << "\nEnter New Bug Description: ";
   cin.getline(obj.Desc, 1000);
 
   // Get New Bug Status
-  cout << "\nStatus of bug:\n";
+  cout << "\nNew Status of bug:\n";
   cout << "[N]: NOT YET ASSIGNED\n";
   cout << "[P]: IN PROGRESS\n[F]: FIXED\n";
   cout << "[D]: DELIVERED\n > ";
@@ -253,6 +254,7 @@ void bug::display_bug() {
     currStatus = "DELIVERED";
     break;
   default:
+    currStatus = "ERROR";
     break;
   }
 
@@ -432,8 +434,7 @@ void bug::get_fname() {
   // Get filename from user input
   cout << "Bug Report Filename: " << endl;
   cout << " > ";
-  cin.ignore();
-  cin.getline(filename, 50);
+  cin >> filename;
 
   clear_screen();
 }
