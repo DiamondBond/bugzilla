@@ -18,7 +18,7 @@
 using namespace std;
 
 // Version
-const string VERSION = "1.2";
+const string VERSION = "1.3";
 
 // Function prototypes for NT/POSIX portability
 void clear_screen();
@@ -472,15 +472,8 @@ void bug::help() {
   cout << "VERSION" << endl;
   cout << "\tv" << VERSION << "\n" << endl;
   cout << "DESCRIPTION" << endl;
-  cout << "\tBug tracking and management.\n" << endl;
-  cout << "FEATURES" << endl;
-  cout << "\tCreate Bug Report - file a bug for tracking.\n" << endl;
-  cout << "\tList Bug Reports - lists bug reports in the current working "
-          "directory.\n"
-       << endl;
-  cout << "\tDisplay Bug Report - display a bug report.\n" << endl;
-  cout << "\tUpdate Bug Report - update a bug report.\n" << endl;
-  cout << "\tRemove Bug Report - deletes a bug report.\n" << endl;
+  cout << "\tBug & Ticket tracking." << endl;
+  cout << "\tCreate, list, view, update and delete bug reports.\n" << endl;
   cout << "RESOURCES" << endl;
   cout << "\tHomepage: https://github.com/diamondbond/bugzilla\n" << endl;
   cout << "NOTES" << endl;
